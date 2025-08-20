@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" class="hr-page">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KEPROBA HR Ticketing System Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="/static/script.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo"><img src="/static/images/logo.svg" alt="KEPROBA Logo"></div>
+        <h1>KEPROBA HR Ticketing System Dashboard</h1>
+    </header>
+    
+    
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="card sidebar-controls">
+                <h2><i class="fas fa-cogs"></i> Controls</h2>
+                <div class="form-group">
+                    <label for="status-filter">Filter by Status:</label>
+                    <select id="status-filter" class="form-select">
+                        <option value="All">All</option>
+                        <option value="Open">Open</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Resolved">Resolved</option>
+                    </select>
+                </div>
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="my-claims" class="form-checkbox">
+                    <label for="my-claims" class="label-inline">View My Claims</label>
+                </div>
+                <div class="form-group">
+                    <label for="search-input">Search Tickets:</label>
+                    <input type="text" id="search-input" placeholder="Ticket ID, name, keyword...">
+                </div>
+                <button id="refresh-btn" class="btn btn-secondary btn-full"><i class="fas fa-sync-alt"></i> Refresh</button>
+            </div>
+            
+            <div class="card unclaimed-tickets">
+                <h2><i class="fas fa-box-open"></i> Unclaimed Tickets</h2>
+                <div id="unclaimed-tickets-container">
+                </div>
+                <div id="unclaimed-spinner" class="loading-spinner" style="display: none;">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="dashboard-metrics-grid">
+                <div class="metric-card">
+                    <h3><i class="fas fa-ticket-alt"></i> Total Tickets</h3>
+                    <p id="total-tickets" class="metric-value">...</p>
+                </div>
+                <div class="metric-card">
+                    <h3><i class="fas fa-folder-open"></i> Open</h3>
+                    <p id="open-tickets" class="metric-value open">...</p>
+                </div>
+                <div class="metric-card">
+                    <h3><i class="fas fa-hourglass-half"></i> In Progress</h3>
+                    <p id="inprogress-tickets" class="metric-value in-progress">...</p>
+                </div>
+                <div class="metric-card">
+                    <h3><i class="fas fa-check-circle"></i> Resolved</h3>
+                    <p id="resolved-tickets" class="metric-value resolved">...</p>
+                </div>
+            </div>
+
+            <div class="dashboard-cards-grid">
+                <div class="dashboard-card">
+                    <h4 class="card-title"><i class="fas fa-chart-pie"></i> Tickets by Issue Type</h4>
+                    <div class="chart-container">
+                        <canvas id="ticket-chart"></canvas>
+                    </div>
+                </div>
+                <div class="dashboard-card">
+                    <h4 class="card-title"><i class="fas fa-building"></i> Tickets by Department</h4>
+                    <div class="chart-container">
+                        <canvas id="department-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card dashboard-metrics-grid">
+                <div class="metric-card">
+                    <h3><i class="fas fa-clock"></i> Avg Resolution Time (hrs)</h3>
+                    <p id="avg-resolution-time" class="metric-value">...</p>
+                </div>
+                <div class="metric-card">
+                    <h3><i class="fas fa-exclamation-triangle"></i> SLA Breaches</h3>
+                    <p id="sla-breaches" class="metric-value open">...</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="table-header">
+                    <h2><i class="fas fa-list-alt"></i> All Tickets</h2>
+                    <div class="dropdown-container">
+                        <select id="reports-dropdown" class="form-select reports-select">
+                            <option value="">Export Reports</option>
+                            <option value="pdf">PDF Report</option>
+                            <option value="docx">Word Report</option>
+                            <option value="xlsx">Excel Report</option>
+                        </select>
+                    </div>
+                    <button id="clear-tickets-btn" class="btn btn-danger btn-sm">Clear All</button>
+                </div>
+                
+                <div id="tickets-container" class="tickets-grid">
+                </div>
+                <div id="loading-spinner" class="loading-spinner">
+                    <div class="spinner"></div>
+                </div>
+                <div id="pagination-controls" class="pagination-controls">
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

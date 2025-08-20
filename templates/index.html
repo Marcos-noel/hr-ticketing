@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" class="client-page">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KEPROBA HR Ticketing System</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="/static/script.js" defer></script>
+</head>
+<body>
+    <style>
+        /* Floating button */
+        .chat-toggle {
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          background-color: #13a345;
+          color: white;
+          border: none;
+          border-radius: 50%;
+          width: 60px;
+          height: 60px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+          font-size: 24px;
+          cursor: pointer;
+          z-index: 999;
+        }
+    
+        /* Hide/show chatbot */
+        .chat-container {
+          position: fixed;
+          bottom: 90px;
+          right: 20px;
+          display: none;
+          z-index: 1000;
+        }
+    
+        .chat-container.active {
+          display: flex;
+        }
+    
+        .typing-indicator {
+          display: flex;
+          align-items: center;
+          margin: 10px 0;
+          padding-left: 10px;
+        }
+    
+        .typing-indicator span {
+          display: inline-block;
+          width: 8px;
+          height: 8px;
+          margin: 0 2px;
+          background-color: #ccc;
+          border-radius: 50%;
+          animation: bounce 1.4s infinite ease-in-out both;
+        }
+    
+        .typing-indicator span:nth-child(1) {
+          animation-delay: -0.32s;
+        }
+        .typing-indicator span:nth-child(2) {
+          animation-delay: -0.16s;
+        }
+    
+      </style>
+    <header>
+        <div class="logo"><img src="/static/images/logo.svg" alt="KEPROBA Logo"></div>
+        <h1>KEPROBA HR Ticketing System</h1>
+    </header>
+    <div class="client-layout dashboard-layout">
+        <div class="sidebar">
+            <div class="card card-form">
+                <h2><i class="fas fa-ticket-alt"></i> New Ticket</h2>
+                <form id="ticket-form">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="department">Your Department</label>
+                        <select id="department" required>
+                            <option value="">Select Department...</option>
+                            <option value="Corporate Services">Corporate Services</option>
+                            <option value="Research and Innovation">Research and Innovation</option>
+                            <option value="Product and Market Development">Product and Market Development</option>
+                            <option value="Nation Branding">Nation Branding</option>
+                            <option value="Resource Centre">Resource Centre</option>
+                            <option value="Stakeholder Engagement">Stakeholder Engagement</option>
+                            <option value="Finance Department">Finance Department</option>
+                            <option value="ICT Department">ICT Department</option>
+                            <option value="HR Department">HR Department</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="issue_type">Issue Type</label>
+                        <select id="issue_type" required>
+                            <option value="">Select Issue...</option>
+                            <option value="training matters">Training Matters</option>
+                            <option value="leave management">Leave Management</option>
+                            <option value="payroll issue">Payroll Issue</option>
+                            <option value="medical insurance issue">Medical Insurance Issue</option>
+                            <option value="group life insurance">Group Life Insurance</option>
+                            <option value="clearance matters">Clearance Matters</option>
+                            <option value="mortgage scheme">Mortgage Scheme</option>
+                            <option value="car loan facility">Car Loan Facility</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="priority">Priority</label>
+                        <select id="priority" required>
+                            <option value="Low">Low</option>
+                            <option value="Medium" selected>Medium</option>
+                            <option value="High">High</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description of Issue</label>
+                        <textarea id="description" rows="5" placeholder="Please describe your issue in detail." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Submit Ticket</button>
+                </form>
+            </div>
+            <div class="card my-tickets-card">
+                <h2><i class="fas fa-search"></i> View My Tickets</h2>
+                <p>Enter your name to view the status of your submitted tickets.</p>
+                <div class="input-group">
+                    <input type="text" id="my-name" placeholder="Your Name">
+                    <button id="view-tickets-btn" class="btn btn-secondary">View</button>
+                </div>
+                <ul id="my-tickets-list" class="tickets-list">
+                    </ul>
+            </div>
+            <a href="/login" class="btn btn-full btn-secondary mt-20">
+                <i class="fas fa-user-shield"></i> Staff Login
+            </a>
+        </div>
+        <main class="main-content">
+            <div class="hero-section card">
+                <h2>Welcome to the KEPROBA HR Ticketing System</h2>
+                <p>Quickly and easily submit your HR-related queries and issues. Our team will work to resolve them as soon as possible, your request will be routed to the appropriate HR staff</p>
+                <p>You can also check the status of your previously submitted tickets by entering your name in the section below.</p>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
